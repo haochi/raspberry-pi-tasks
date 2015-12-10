@@ -1,0 +1,4 @@
+#!/bin/bash
+cd $HOME/tasks
+./tts `date +"%I %M %p"`
+./emailer

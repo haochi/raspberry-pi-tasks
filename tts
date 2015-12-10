@@ -1,0 +1,6 @@
+#!/bin/bash
+TEMP_NAME=`< /dev/urandom tr -dc A-Z-a-z-0-9 | head -c32`
+WAVE_NAME="${TEMP_NAME}.wav"
+echo "$1" | text2wave -o "${WAVE_NAME}"
+omxplayer "${WAVE_NAME}"
+rm "$WAVE_NAME"

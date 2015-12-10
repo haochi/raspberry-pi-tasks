@@ -1,0 +1,5 @@
+config.json
+
+*.swp
+*.pyc
+*.pyo
