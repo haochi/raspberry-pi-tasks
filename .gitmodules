@@ -1,0 +1,3 @@
+[submodule "lib/pyvona"]
+	path = lib/pyvona
+	url = https://github.com/zbears/pyvona

@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import lib.pyvona.pyvona as ivona
+import json
+import sys
+import subprocess
+import os
+import tempfile
+
+if len(sys.argv) > 1:
+    text = sys.argv[1]
+
+    config = json.load(open('./config.json'))
+    codec = 'mp3'
+    file_ext = '.{}'.format(codec)
+    temp_voice_file = tempfile.NamedTemporaryFile(suffix=file_ext)
+
+    file_name_with_ext = temp_voice_file.name
+    file_name = file_name_with_ext[:-len(file_ext)]
+
+    voice = ivona.create_voice(config['ivona']['access_key'], config['ivona']['secret_key'])
+    voice.codec = codec
+    voice.voice_name = 'Emma'
+    voice.fetch_voice(text, file_name)
+
+    subprocess.call(['mpg123', file_name_with_ext])
