@@ -6,12 +6,20 @@ import subprocess
 import os
 import tempfile
 
-if len(sys.argv) > 1:
-    text = sys.argv[1]
+config = json.load(open('./config.json'))
+codec = 'mp3'
+file_ext = '.{}'.format(codec)
 
-    config = json.load(open('./config.json'))
-    codec = 'mp3'
-    file_ext = '.{}'.format(codec)
+def main():
+    lines = None
+
+    if len(sys.argv) > 1:
+        tts(sys.argv[1:])
+    else:
+        tts(sys.stdin)
+
+def tts(lines):
+    text = '\n'.join(lines)
     temp_voice_file = tempfile.NamedTemporaryFile(suffix=file_ext)
 
     file_name_with_ext = temp_voice_file.name
@@ -23,3 +31,6 @@ if len(sys.argv) > 1:
     voice.fetch_voice(text, file_name)
 
     subprocess.call(['mpg123', file_name_with_ext])
+
+if __name__ == '__main__':
+    main()

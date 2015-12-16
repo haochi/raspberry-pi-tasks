@@ -3,4 +3,4 @@ import lib.mailgun as mailgun
 from time import gmtime, strftime
 
 formatted_time = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
-mailgun.send(formatted_time, "reporting in")
+mailgun.send("Reporting In", formatted_time)

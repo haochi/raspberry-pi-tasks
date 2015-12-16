@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function announce_time {
+    ./time-announcer | ./ivona-tts
+}
+
+mpg123 `./random-tune $1` & TUNE_PID=$!
+echo $TUNE_PID
+
+sleep 10
+announce_time
+
+while kill -0 "$TUNE_PID" >/dev/null 2>&1; do
+    echo $TUNE_PID
+    sleep 120
+    announce_time
+done
+
+exit 0

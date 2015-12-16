@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+import subprocess
+from pathlib import Path
+import sys
+import random
+
+tones_path = Path(sys.argv[1])
+tones = list(tones_path.glob('**/*.mp3'))
+
+chosen_tone = random.choice(tones)
+
+print(chosen_tone)
+
